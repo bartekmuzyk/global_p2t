@@ -4,9 +4,15 @@ block_cipher = None
 
 
 a = Analysis(['main.py'],
-             pathex=['/home/bartosz/PycharmProjects/global_p2t'],
+             pathex=[
+                '.',
+                './venv/lib/python3.8/site-packages',
+                './venv/lib64/python3.8/site-packages'
+             ],
              binaries=[],
-             datas=[],
+             datas=[
+                ('config_window.ui', '.')
+             ],
              hiddenimports=[],
              hookspath=[],
              runtime_hooks=[],
@@ -21,12 +27,12 @@ exe = EXE(pyz,
           a.scripts,
           [],
           exclude_binaries=True,
-          name='main',
+          name='Global P2T',
           debug=False,
           bootloader_ignore_signals=False,
           strip=False,
           upx=True,
-          console=True )
+          console=False )
 coll = COLLECT(exe,
                a.binaries,
                a.zipfiles,
