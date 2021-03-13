@@ -1,4 +1,3 @@
-# 1.0
 import platform
 import sys
 import json

@@ -34,7 +34,7 @@ jobs:
         run: pyinstaller --onedir main.spec ; zip -r GlobalP2T_Linux.zip dist/main/
 
       - name: Get version tag
-        run: export VERSION_TAG=$(bash -c "echo ${$(head -n 1 main.py):1}")
+        run: export VERSION_TAG=$(cat version.txt)
 
       - name: Create Release
         uses: ncipollo/release-action@v1
