@@ -38,7 +38,7 @@ jobs:
         # uses: anton-yurchenko/git-release@aca5d54f34fd7fee889f093b67161bc7b9611d81
         uses: anton-yurchenko/git-release@v3.4.3
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_ROKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
           DRAFT_RELEASE: "true"
           PRE_RELEASE: "false"
           CHANGELOG_FILE: "CHANGELOG.md"
