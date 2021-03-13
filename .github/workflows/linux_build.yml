@@ -39,4 +39,5 @@ jobs:
           artifacts: "dist\\main\\Global P2T.exe"
           bodyFile: "CHANGELOG.md"
           token: ${{ github.token }}
-          omitName: true
+          name: "Version X.X"
+          tag: "vX.X"
