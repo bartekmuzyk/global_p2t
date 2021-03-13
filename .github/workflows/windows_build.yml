@@ -28,7 +28,7 @@ jobs:
           token: ${{ github.token }}
       
       - name: Install dependencies
-        run: pip install -r requirements.txt ; pip install pyaudio pyinstaller
+        run: pip install -r requirements.txt ; pip install pipwin pyinstaller ; pipwin install pyaudio
       
       - name: Build
         run: pyinstaller --onedir main.spec
