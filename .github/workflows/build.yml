@@ -34,7 +34,7 @@ jobs:
         run: pyinstaller --onedir main.spec ; zip -r GlobalP2T_Linux.zip dist/main/
 
       - name: Get version tag
-        run: export VERSION_TAG=$(cat version.txt)
+        run: echo "VERSION_TAG=$(cat version.txt)" >> $GITHUB_ENV
 
       - name: Create Release
         uses: ncipollo/release-action@v1
