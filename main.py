@@ -1,6 +1,8 @@
+import platform
 import sys
 import json
 import math
+import os
 from typing import List, Dict, Optional, Any, TextIO, Final
 from pathlib import Path
 import pynput.keyboard as kb
@@ -10,8 +12,7 @@ from PyQt5.QtGui import QFontMetrics, QFont
 from PyQt5.QtCore import pyqtSlot, pyqtSignal, Qt, QRunnable, QThreadPool, QObject
 from PyQt5.QtWidgets import *
 from PyQt5.QtWidgets import QMessageBox as MsgBox
-from pulsectl import PulseVolumeInfo
-from muter import Muter, Device
+import pymsgbox
 
 PERSIST_FILE: Final[str] = "persist"
 persist_data: Dict[str, Any] = {}
@@ -23,6 +24,50 @@ if Path(PERSIST_FILE).exists():
         f.close()
 else:
     persist_data = {}
+
+target_os = "windows" or platform.system().lower()
+SVV_PATH: Optional[str] = None
+
+if target_os == "linux":
+    from muter import Muter, Device
+elif target_os == "windows":
+    SVV_EXE: Final = "SoundVolumeView.exe"
+    paths: List[str] = os.getenv("PATH").split(';')
+
+    for path in paths:
+        full_path: str = f"{path}{SVV_EXE}" if path.endswith('\\') else f"{path}\\{SVV_EXE}"
+        if Path(full_path).is_file():
+            SVV_PATH = full_path
+            break
+
+    if not SVV_PATH:
+        SVV_PATH = pymsgbox.prompt(
+            title="Nie znaleziono programu",
+            text=f"Ta aplikacja wymaga narzędzia {SVV_EXE}, którego nie znaleziono.\nPodaj ścieżkę do programu tutaj.",
+            default=f"C:\\Windows\\System32\\{SVV_EXE}"
+        )
+        if not SVV_PATH:
+            sys.exit(0)
+
+    while not Path(SVV_PATH).is_file():
+        SVV_PATH = pymsgbox.prompt(
+            title="Nie znaleziono programu",
+            text=f"Ścieżka {SVV_PATH} jest niepoprawna.",
+            default=SVV_PATH
+        )
+        if not SVV_PATH:
+            sys.exit(0)
+
+    persist_data["SVV"] = SVV_PATH
+
+    from windows_muter import Muter, Device
+else:
+    pymsgbox.alert(
+        title="Brak wsparcia",
+        text=f"Ten program nie obsługuje twojego systemu ({target_os}).",
+        button="Zamknij program"
+    )
+    sys.exit(1)
 
 
 def get_persisted_device() -> Optional[str]:

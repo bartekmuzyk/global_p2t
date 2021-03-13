@@ -1,6 +1,7 @@
 evdev==1.4.0
 playsound==1.2.2
 pulsectl==21.3.4
+PyMsgBox==1.0.9
 pynput==1.6.8
 PyQt5==5.15.4
 PyQt5-Qt5==5.15.2

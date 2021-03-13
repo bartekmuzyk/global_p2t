@@ -2,13 +2,14 @@ from typing import List, Dict, Optional
 import pulsectl
 
 Device = pulsectl.PulseSourceInfo
+Client = pulsectl.Pulse
 
 
 class Muter:
-    __client: pulsectl.Pulse
+    __client: Client
     usedDevice: Optional[Device] = None
 
-    def __init__(self, client_name: str):
+    def __init__(self, client_name: str, _=None):
         self.__client = pulsectl.Pulse(client_name)
 
     @property
@@ -30,5 +31,5 @@ class Muter:
     def unmute(self):
         self.__client.mute(self.usedDevice, False)
 
-    def getClient(self) -> pulsectl.Pulse:
+    def getClient(self) -> Client:
         return self.__client
