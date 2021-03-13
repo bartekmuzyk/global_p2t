@@ -2,17 +2,19 @@
 przełanczanie mikrofona klawiszami ni
 
 ## Budowanie ze źródła
-### Wymagany jest `pyinstaller` (`pip install pyinstaller`).
+### Wymagany jest `pyinstaller`.
 Przed zbudowaniem aplikacji zainstaluj wszystkie zależności:
 
 **Windows:**
 ```cmd
+pip install pyinstaller
 pip install -r requirements.txt
 pip install pyaudio
 ```
 
 **Linux:**
 ```bash
+pip install pyinstaller
 pip install -r requirements.txt
 sudo apt install python3-pyaudio
 ```
