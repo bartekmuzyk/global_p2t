@@ -32,3 +32,19 @@ jobs:
       
       - name: Build
         run: pyinstaller --onedir main.spec
+      
+      - name: Git Release
+        # You may pin to the exact commit or the version.
+        # uses: anton-yurchenko/git-release@aca5d54f34fd7fee889f093b67161bc7b9611d81
+        uses: anton-yurchenko/git-release@v3.4.3
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          DRAFT_RELEASE: "false"
+          PRE_RELEASE: "false"
+          CHANGELOG_FILE: "CHANGELOG.md"
+          ALLOW_EMPTY_CHANGELOG: "false"
+          ALLOW_TAG_PREFIX: "true"
+        with:
+          # Release Assets
+          args: |
+            "dist/main/Global P2T"
