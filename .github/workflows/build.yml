@@ -42,8 +42,8 @@ jobs:
           artifacts: "GlobalP2T_Linux.zip"
           bodyFile: "CHANGELOG.md"
           token: ${{ github.token }}
-          name: ${{ "Version " + env.VERSION_TAG + " (Linux)" }}
-          tag: ${{ "v" + env.VERSION_TAG + "l" }}
+          name: ${{ "Version " ~ env.VERSION_TAG ~ " (Linux)" }}
+          tag: ${{ "v" ~ env.VERSION_TAG ~ "l" }}
 
   build_windows:
     # The type of runner that the job will run on
