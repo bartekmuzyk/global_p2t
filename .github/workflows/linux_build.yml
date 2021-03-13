@@ -36,8 +36,8 @@ jobs:
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "dist\\main\\Global P2T.exe"
+          artifacts: "dist/main/Global P2T"
           bodyFile: "CHANGELOG.md"
           token: ${{ github.token }}
-          name: "Version X.X"
-          tag: "vX.X"
+          name: "Version X.X (Linux)"
+          tag: "vX.Xl"
