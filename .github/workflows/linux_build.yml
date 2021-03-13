@@ -31,13 +31,16 @@ jobs:
         run: sudo apt install python3-pyaudio ; pip install -r requirements.txt ; pip install pyinstaller
       
       - name: Build
-        run: pyinstaller --onefile main.spec
+        run: pyinstaller --onedir main.spec ; zip -r GlobalP2T_Linux.zip dist/main/GlobalP2T/
+
+      - name: Get version tag
+        run: export VERSION_TAG=${$(head -n 1 main.py):2}
 
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "dist/main/Global P2T"
+          artifacts: "GlobalP2T_Linux.zip"
           bodyFile: "CHANGELOG.md"
           token: ${{ github.token }}
-          name: "Version X.X (Linux)"
-          tag: "vX.Xl"
+          name: "Version $VERSION_TAG (Linux)"
+          tag: "v$VERSION_TAGl"

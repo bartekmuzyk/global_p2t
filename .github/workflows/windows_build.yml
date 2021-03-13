@@ -31,13 +31,16 @@ jobs:
         run: pip install -r requirements.txt ; pip install pipwin pyinstaller ; pipwin install pyaudio
       
       - name: Build
-        run: pyinstaller --onefile main.spec
+        run: pyinstaller --onedir main.spec ; tar.exe -cvf dist\\main GlobalP2T_Windows.zip
+
+      - name: Get version tag
+        run: export VERSION_TAG=${$(head -n 1 main.py):2}
 
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "dist\\main\\Global P2T.exe"
+          artifacts: "GlobalP2T_Windows.zip"
           bodyFile: "CHANGELOG.md"
           token: ${{ github.token }}
-          name: "Version X.X (Windows)"
-          tag: "vX.Xw"
+          name: "Version $VERSION_TAG (Windows)"
+          tag: "v$VERSION_TAGw"
