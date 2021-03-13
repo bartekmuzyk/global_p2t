@@ -31,7 +31,7 @@ jobs:
         run: sudo apt install python3-pyaudio ; pip install -r requirements.txt ; pip install pyinstaller
       
       - name: Build
-        run: pyinstaller --onedir main.spec ; zip -r GlobalP2T_Linux.zip dist/main/GlobalP2T/
+        run: pyinstaller --onedir main.spec ; zip -r GlobalP2T_Linux.zip dist/main/
 
       - name: Get version tag
         run: export VERSION_TAG=${$(head -n 1 main.py):2}
