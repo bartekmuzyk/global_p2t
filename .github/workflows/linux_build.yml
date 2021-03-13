@@ -32,19 +32,11 @@ jobs:
       
       - name: Build
         run: pyinstaller --onefile main.spec
-      
-      - name: Git Release
-        # You may pin to the exact commit or the version.
-        # uses: anton-yurchenko/git-release@aca5d54f34fd7fee889f093b67161bc7b9611d81
-        uses: anton-yurchenko/git-release@v3.4.3
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-          DRAFT_RELEASE: "true"
-          PRE_RELEASE: "false"
-          CHANGELOG_FILE: "CHANGELOG.md"
-          ALLOW_EMPTY_CHANGELOG: "true"
-          ALLOW_TAG_PREFIX: "false"
+
+      - name: Create Release
+        uses: ncipollo/release-action@v1
         with:
-          # Release Assets
-          args: |
-            "dist/main/Global P2T"
+          artifacts: "dist\\main\\Global P2T.exe"
+          bodyFile: "CHANGELOG.md"
+          token: ${{ github.token }}
+          omitName: true
