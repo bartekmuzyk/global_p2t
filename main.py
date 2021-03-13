@@ -155,7 +155,8 @@ class Ui(QMainWindow):
     def __startup(self):
         self.refreshDevices()
         # Check if there's a default device set and if it's connected
-        if (device_name := get_persisted_device()) is not None:
+        device_name: Optional[str] = get_persisted_device()
+        if device_name is not None:
             if device_name in self.devices:
                 self.enabledDeviceName = device_name
                 self.muter.useDevice(self.devices[self.enabledDeviceName])
