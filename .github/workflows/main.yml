@@ -34,6 +34,6 @@ jobs:
           # Specify a custom URL for PYPI Index
           pypi_index_url: https://pypi.python.org/simple
           # Specify a file path for .spec file
-          spec: main.spec
+          spec: .
           # Specify whether to install Tkinter or not
           tkinter: false
