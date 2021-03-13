@@ -43,7 +43,7 @@ jobs:
           bodyFile: "CHANGELOG.md"
           token: ${{ github.token }}
           name: ${{ "Version " + env.VERSION_TAG + " (Linux)" }}
-          tag: ${{ "v" + env.VERSION_TAG) + "l" }}
+          tag: ${{ "v" + env.VERSION_TAG + "l" }}
 
   build_windows:
     # The type of runner that the job will run on
