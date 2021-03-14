@@ -25,12 +25,15 @@ if Path(PERSIST_FILE).exists():
 else:
     persist_data = {}
 
-target_os = "windows" or platform.system().lower()
+target_os = platform.system().lower()
 SVV_PATH: Optional[str] = None
 
 if target_os == "linux":
     from muter import Muter, Device
 elif target_os == "windows":
+    if "SVV" in persist_data:
+        pass
+
     SVV_EXE: Final = "SoundVolumeView.exe"
     paths: List[str] = os.getenv("PATH").split(';')
 

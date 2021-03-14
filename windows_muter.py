@@ -8,30 +8,29 @@ SVV: SoundVolumeView
 
 class Device:
     name: str
-    __volume: float = .0,
-    __muted: bool = False
 
     def __init__(self, name: str):
         self.name = name
 
     @property
     def volume(self) -> float:
-        return self.__volume
+        global SVV
+        return SVV.getVolume(self.name) / 100
 
     @volume.setter
     def volume(self, val: float):
-        SVV.setVolume(self.name, val)
-        self.__volume = val
+        global SVV
+        SVV.setVolume(self.name, math.ceil(val * 100))
 
     @property
     def muted(self) -> bool:
-        return self.__muted
+        global SVV
+        return SVV.isMuted(self.name)
 
     @muted.setter
     def muted(self, val: bool):
         global SVV
         SVV.mute(self.name) if val else SVV.unmute(self.name)
-        self.__muted = val
 
     def __repr__(self):
         return f"<windows_muter.Device {self.id=} {self.name=} {self.volume=} {self.muted=}>"
@@ -54,7 +53,6 @@ class Client:
 
 class Muter:
     __client: Client
-    __nir: str
     usedDevice: Optional[Device] = None
 
     def __init__(self, _: str, svv_path: str):

@@ -17,8 +17,8 @@ class SoundVolumeView:
     def unmute(self, device_name: str):
         self.__execute("Unmute", device_name)
 
-    def setVolume(self, device_name: str, volume: float):
-        self.__execute("SetVolume", device_name, math.ceil(volume * 100))
+    def setVolume(self, device_name: str, volume: int):
+        self.__execute("SetVolume", device_name, volume)
 
     def getVolume(self, device_name: str) -> int:
         return self.__execute("GetPercent", device_name)
