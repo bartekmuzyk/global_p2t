@@ -60,15 +60,21 @@ jobs:
         run: pip install -r requirements.txt ; pip install pipwin pyinstaller ; pipwin install pyaudio
 
       - name: Build
-        run: pyinstaller --onedir main.spec ; tar.exe -cvf dist\\main GlobalP2T_Windows.zip
+        run: pyinstaller --onedir main.spec
+
+      - name: Pack
+        uses: Amadevus/pwsh-script@v2
+        with:
+          script: "Compress-Archive dist\\main GlobalP2T_Windows.zip"
+
+      - name: Get version tag
+        run: for /f %%i in ('type version.txt') do set version=%%i ; echo VERSION_TAG=%version% >> $GITHUB_ENV
 
       - name: Create Release
         uses: ncipollo/release-action@v1
-        env:
-          VERSION_TAG: "X.X"
         with:
           artifacts: "GlobalP2T_Windows.zip"
           bodyFile: "CHANGELOG.md"
           token: ${{ github.token }}
-          name: "Version $VERSION_TAG (Windows)"
-          tag: "v$VERSION_TAGw"
+          name: "Version ${{ env.VERSION_TAG }} (Windows)"
+          tag: "v${{ env.VERSION_TAG }}w"
