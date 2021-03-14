@@ -68,7 +68,7 @@ jobs:
           script: "Compress-Archive dist\\main GlobalP2T_Windows.zip"
 
       - name: Get version tag
-        run: for /f %%i in ('type version.txt') do set version=%%i ; echo VERSION_TAG=%version% >> $GITHUB_ENV
+        run: set /p version=<version.txt ; echo VERSION_TAG=%version% >> $GITHUB_ENV
 
       - name: Create Release
         uses: ncipollo/release-action@v1
