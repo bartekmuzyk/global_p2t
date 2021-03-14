@@ -62,13 +62,13 @@ jobs:
       - name: Build
         run: pyinstaller --onedir main.spec
 
-      - name: Pack
+      - name: Pack and get version tag
         uses: Amadevus/pwsh-script@v2
         with:
-          script: "Compress-Archive dist\\main GlobalP2T_Windows.zip"
-
-      - name: Get version tag
-        run: set /p version=<version.txt ; echo Got tag %version% ; echo VERSION_TAG=%version% >> $GITHUB_ENV
+          script: |
+            Compress-Archive dist\\main GlobalP2T_Windows.zip
+            $version = [IO.File]::ReadAllText("version.txt")
+            Add-Content -Path $Env:GITHUB_ENV -Value "VERSION_TAG=$($version)"
 
       - name: Create Release
         uses: ncipollo/release-action@v1
