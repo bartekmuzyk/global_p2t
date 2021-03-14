@@ -11,6 +11,7 @@ pip install pyinstaller
 pip install -r requirements.txt
 pip install pyaudio
 ```
+Dodatkowo wymagane jest narzędzie SoundVolumeView, które można pobrać ze [strony producenta](https://www.nirsoft.net/utils/sound_volume_view.html).
 
 **Linux:**
 ```bash
@@ -19,13 +20,11 @@ pip install -r requirements.txt
 sudo apt install python3-pyaudio
 ```
 
-Tryb jednego folderu - przenosi wszystkie biblioteki razem z plikiem wykonywalnym do folderu `./dist/main`
+Tryb jednego folderu (**rekomendowane**) - przenosi wszystkie biblioteki razem z plikiem wykonywalnym do folderu `./dist/main`
 ```bash
 pyinstaller --onedir main.spec
 ```
-Tryb jednego pliku (**rekomendowane**) - tworzy jeden plik wykonywalny, w którym zapakowane są wszystkie zależności
+Tryb jednego pliku (**może nie działać**) - tworzy jeden plik wykonywalny, w którym zapakowane są wszystkie zależności
 ```bash
 pyinstaller --onefile main.spec
 ```
-
-### Na razie program jest kompatybilny jedynie z systemem PulseAudio, więc nie zadziała natywnie na innych platformach niż Linux.
